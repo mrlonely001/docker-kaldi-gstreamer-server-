@@ -1,5 +1,5 @@
 FROM kaldiasr/kaldi:latest
-MAINTAINER John <595104095@qq.com>
+MAINTAINER mrlonely <1394018128@qq.com>
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
