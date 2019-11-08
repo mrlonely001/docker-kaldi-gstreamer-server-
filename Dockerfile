@@ -1,5 +1,5 @@
 FROM kaldiasr/kaldi:latest
-MAINTAINER mrlonely <1394018128@qq.com>
+MAINTAINER John <595104095@qq.com>
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
@@ -55,12 +55,15 @@ RUN cd /opt/kaldi/tools && \
     rm -rf /opt/kaldi/.git && \
     rm -rf /opt/kaldi/egs/ /opt/kaldi/windows/ /opt/kaldi/misc/ && \
     find /opt/kaldi/src/ -type f -not -name '*.so' -delete && \
-    find /opt/kaldi/tools/ -type f \( -not -name '*.so' -and -not -name '*.so*' \) -delete && \
-    cd /opt && git clone https://github.com/naxingyu/kaldi-gstreamer-server.git && \
+    find /opt/kaldi/tools/ -type f \( -not -name '*.so' -and -not -name '*.so*' \) -delete 
+    
+    
+RUN cd /opt && git clone https://github.com/naxingyu/kaldi-gstreamer-server.git && \
     rm -rf /opt/kaldi-gstreamer-server/.git/ && \
-    rm -rf /opt/kaldi-gstreamer-server/test/ && \
-    mkdir -p /opt/models/chinese && cd /opt/models/chinese && \
-    wget http://kaldi-asr.org/models/11/0011_multi_cn_chain_sp_online_v2.tar.gz && \
+    rm -rf /opt/kaldi-gstreamer-server/test/ 
+ 
+RUN mkdir -p /opt/models/chinese && cd /opt/models/chinese && \
+    wget -t 0 -T 120 -c http://kaldi-asr.org/models/11/0011_multi_cn_chain_sp_online_v2.tar.gz && \
     tar zxvf 0011_multi_cn_chain_sp_online_v2.tar.gz && \
     rm 0011_multi_cn_chain_sp_online_v2.tar.gz && \
     cp /opt/kaldi-gstreamer-server/sample_chinese_nnet3.yaml /opt/models && \
